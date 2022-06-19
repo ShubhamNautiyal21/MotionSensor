@@ -1,0 +1,99 @@
+Screen.fullScreen = !Screen.fullScreen;
+Screen.sleepTimeout = SleepTimeout.NeverSleep; // to not let the screen sleep 
+
+
+Screen.width;//for current screen/canvas width 
+Screen.height;//for currenr screen/canvas height 
+
+Input.acceleration.x // for x POS 
+Input.acceleration.y // for y POS 
+
+
+    void MovementOnScreen() 
+    {     
+        if (Input.acceleration.x < 0 && !leftNotAllowed)
+        { 
+            gameObject.transform.localPosition = new Vector2(gameObject.transform.localPosition.x + Input.acceleration.x * moveX, gameObject.transform.localPosition.y);
+            
+            if (gameObject.transform.localPosition.x < -canavsX) 
+            { 
+                gameObject.transform.localPosition = new Vector2(-canavsX, gameObject.transform.localPosition.y);
+            } 
+    
+        } 
+        if (Input.acceleration.x > 0 && !rightNotAllowed) 
+        { 
+    
+            gameObject.transform.localPosition = new Vector2(gameObject.transform.localPosition.x + Input.acceleration.x * moveX, gameObject.transform.localPosition.y);
+           
+    
+            if (gameObject.transform.localPosition.x > canavsX) 
+            { 
+                gameObject.transform.localPosition = new Vector2(canavsX, gameObject.transform.localPosition.y);
+                
+            } 
+            
+        if (Input.acceleration.y > 0 && !upNotAllowed)
+        { 
+    
+            gameObject.transform.localPosition = new Vector2(gameObject.transform.localPosition.x, gameObject.transform.localPosition.y + Input.acceleration.y * moveY);
+            if (gameObject.transform.localPosition.y > canvasY) 
+            { 
+                gameObject.transform.localPosition = new Vector2(gameObject.transform.localPosition.x, canvasY);
+            } 
+        }
+        
+        if (Input.acceleration.y < 0 && !downNotAllowed) 
+        {
+    
+            gameObject.transform.localPosition = new Vector2(gameObject.transform.localPosition.x, gameObject.transform.localPosition.y + Input.acceleration.y * moveY);
+            if (gameObject.transform.localPosition.y < -canvasY) 
+            { 
+                gameObject.transform.localPosition = new Vector2(gameObject.transform.localPosition.x, -canvasY);
+            } 
+        } 
+    
+    } 
+
+
+      
+    void MovementChecker() 
+    { 
+      if (gameObject.transform.localPosition.x <= -canavsX) 
+        { 
+            leftNotAllowed = true; 
+        } 
+        else 
+        { 
+            leftNotAllowed = false; 
+        }
+        
+        if (gameObject.transform.localPosition.x >= canavsX)
+        { 
+            rightNotAllowed = true; 
+        } 
+        else 
+        { 
+            rightNotAllowed = false;
+        } 
+        
+        if (gameObject.transform.localPosition.y >= canvasY) 
+        { 
+            upNotAllowed = true; 
+        } 
+        else 
+        { 
+            upNotAllowed = false; 
+        } 
+        
+        if (gameObject.transform.localPosition.y <= -canvasY) 
+        { 
+            downNotAllowed = true; 
+        } 
+        else 
+        { 
+            downNotAllowed = false; 
+        } 
+    
+    } 
+          
